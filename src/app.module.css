@@ -1,0 +1,57 @@
+.app {
+	text-align: center;
+}
+
+.validForm {
+	width: 300px;
+	margin: 0 auto;
+	padding: 20px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+}
+
+.validInput {
+	display: block;
+	width: 92%;
+	padding: 10px;
+	margin-bottom: 15px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	font-size: 16px;
+}
+
+.validButton {
+	display: block;
+	width: 100%;
+	padding: 10px;
+	background-color: #4caf50;
+	color: white;
+	border: none;
+	border-radius: 3px;
+	font-size: 16px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+.validButton:hover {
+	background-color: #45a049;
+	opacity: 0.8;
+}
+
+.validButton:active {
+	background-color: #3e8e41;
+	opacity: 0.6;
+	transform: translateY(2px);
+}
+
+.validButton:disabled {
+	background-color: #cccccc;
+	color: #666666;
+	cursor: not-allowed;
+	opacity: 0.6;
+}
+
+.errorLabel {
+	color: red;
+	font-size: 15px;
+}
