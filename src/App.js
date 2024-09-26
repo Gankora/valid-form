@@ -38,7 +38,7 @@ function App() {
 		let newError = null;
 
 		if (target.value === '') {
-			newError = 'Необходимо заполнить поле';
+			newError = 'Необходимо заполнить email-адрес';
 		} else if (cyrillicRegex.test(target.value)) {
 			newError = 'В имени почты не должно быть кириллицы';
 		} else if (!emailRegex.test(target.value)) {
@@ -57,7 +57,7 @@ function App() {
 		let newError = null;
 
 		if (target.value === '') {
-			newError = 'Необходимо заполнить поле';
+			newError = 'Необходимо заполнить пароль';
 		} else if (cyrillicRegex.test(target.value)) {
 			newError = 'В названии пароля нельзя использовать кириллицу';
 		} else if (!passwordRegex.test(target.value)) {
@@ -70,6 +70,10 @@ function App() {
 	// валидация 2 пароля
 	const validationSecondPassword = ({ target }) => {
 		updateState('secondPassword', target.value);
+		if (password === '') {
+			setPasswordError('Необходимо заполнить пароль');
+			updateState('secondPassword', '');
+		}
 	};
 
 	// сравнение двух паролей при клике на кнопку
@@ -96,7 +100,7 @@ function App() {
 
 		if (password !== secondPassword) {
 			setPasswordRepeatError('Ошибка совместимости значений пароля');
-
+			updateState('secondPassword', '');
 			setTimeout(() => {
 				setPasswordRepeatError(null);
 			}, 3000);
@@ -106,11 +110,7 @@ function App() {
 	};
 
 	const focusForm = () => {
-		if (
-			email !== '' &&
-			password !== '' &&
-			secondPassword.length === password.length - 1
-		) {
+		if (email !== '' && secondPassword.trim().length === password.trim().length - 1) {
 			submitButtonRef.current.focus();
 		}
 	};
@@ -144,6 +144,7 @@ function App() {
 					placeholder="Повтор пароля"
 					value={secondPassword}
 					onChange={validationSecondPassword}
+					disabled={passwordError}
 				/>
 				{passwordRepeatError && (
 					<p className={styles.errorLabel}>{passwordRepeatError}</p>
