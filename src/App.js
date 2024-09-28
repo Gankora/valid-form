@@ -2,10 +2,6 @@ import styles from './app.module.css';
 import { useStore } from './Components/useStore';
 import { useState, useRef } from 'react';
 
-const sendFormData = (formData) => {
-	console.log(formData);
-};
-
 function App() {
 	const submitButtonRef = useRef(null);
 	const [emailError, setEmailError] = useState(null);
@@ -23,6 +19,12 @@ function App() {
 	const onDataLog = (e) => {
 		e.preventDefault();
 		sendFormData(getState());
+		updateState({ email: '', password: '', secondPassword: '' });
+		alert('Регистрация успешно пройдена');
+	};
+
+	const sendFormData = (formData) => {
+		console.log(formData);
 	};
 
 	// инициализируем переменные для использования в JSX разметке
@@ -30,7 +32,8 @@ function App() {
 
 	// валидация email
 	const validationEmail = ({ target }) => {
-		updateState('email', target.value);
+		//updateState('email', target.value);
+		updateState({ email: target.value });
 		const cyrillicRegex = /[а-яА-Я]/;
 		const emailRegex =
 			/^(([^<>()[\]\\%^№"'?/|*&$#!.,;:+-\s@"]{1,}(\.[^<>()[\]\\%^№"'?/|*&$#!.,;:+-\s@"]{3,})*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -50,7 +53,8 @@ function App() {
 
 	// валидация пароля
 	const validationPassword = ({ target }) => {
-		updateState('password', target.value);
+		//updateState('password', target.value);
+		updateState({ password: target.value });
 		const cyrillicRegex = /[а-яА-Я]/;
 		const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{5,}$/;
 
@@ -69,10 +73,11 @@ function App() {
 	};
 	// валидация 2 пароля
 	const validationSecondPassword = ({ target }) => {
-		updateState('secondPassword', target.value);
+		//updateState('secondPassword', target.value);
+		updateState({ secondPassword: target.value });
 		if (password === '') {
 			setPasswordError('Необходимо заполнить пароль');
-			updateState('secondPassword', '');
+			updateState({ secondPassword: '' });
 		}
 	};
 
@@ -100,7 +105,8 @@ function App() {
 
 		if (password !== secondPassword) {
 			setPasswordRepeatError('Ошибка совместимости значений пароля');
-			updateState('secondPassword', '');
+			//updateState('secondPassword', '');
+			updateState({ secondPassword: '' });
 			setTimeout(() => {
 				setPasswordRepeatError(null);
 			}, 3000);
